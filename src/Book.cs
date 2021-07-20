@@ -1,42 +1,16 @@
-﻿using GradeBook.src;
-using System;
-using System.Collections.Generic;
-
-namespace GradeBook
+﻿namespace GradeBook.src
 {
-   public class Book
+    public abstract class Book : NamedObject, IBook
     {
-        private List<double> grades;  //field - only accessible in this class
-        private string name;
-        public Book(string name)   // Constructor - special method
+        protected Book(string name) : base(name)
         {
-            this.name = name;
-            grades = new List<double>();
         }
 
-       public Statistics ShowStatistics()  // returns object of type Statistics
-        {
-           
-            var result = new Statistics();
-            
-            result.Average = 0.0;
-            result.High = double.MinValue;
-            result.Low = double.MaxValue;
+        public abstract event GradeAddedDelegate GradeAdded;
 
-            foreach (var grade in grades)
-            {
-                result.High = Math.Max(grade, result.High);
-                result.Low = Math.Min(grade, result.Low);
-                result.Average += grade;
-            }
-            result.Average /= grades.Count;
+        public abstract void AddGrade(double grade);   // abstract method - body in derived classes
 
-            return result;
-        }
-
-        public void AddGrade(double grade)  
-        {
-            grades.Add(grade);
-        }
+        public abstract Statistics GetStatistics();
+        
     }
 }
