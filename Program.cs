@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace GradeBook
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            // var book = new InMemoryBook("Victor's book");
-            IBook book = new DiskBook("Victor's DiskBook");
+            var book = new InMemoryBook("Victor's book");
+            //IBook book = new DiskBook("Victor's DiskBook");
 
             // 3. we handle the GradeAdded event
             book.GradeAdded += OnGradeAdded;
